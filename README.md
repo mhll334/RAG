@@ -1,4 +1,4 @@
-RAG:
+**RAG:**
 ```
 pip install ollama
 pip install streamlit
