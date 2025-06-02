@@ -21,7 +21,7 @@ ollama pull ycchen/breeze-7b-instruct-v1_0
 
 using LangChain
 ```
-pip install langchain langchain-community langchain-nomic langchain-ollama chromadb ollama nomic httpx
+pip install langchain langchain-community langchain-nomic langchain-ollama chromadb ollama 
 ```
 pull llm in ollama:
 ```
