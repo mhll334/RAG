@@ -61,8 +61,8 @@ PROMPT = """請根據以下內容以繁體中文作答，不得加入未提及�
 問題：{question}
 回答："""
 @st.cache_resource
-def create_rag_chain(_retriever, model_name: str, temperature: float = 0.0):
-    llm = ChatOllama(model=model_name, temperature=temperature)
+def create_rag_chain(_retriever, model_name: str):
+    llm = ChatOllama(model=model_name)
     prompt = PromptTemplate.from_template(PROMPT)
     return RetrievalQA.from_chain_type(
         llm=llm,
@@ -82,14 +82,13 @@ vs   = build_vectorstore(docs)
 retr = get_retriever(vs)
 
 # 2. 側欄設定
-model = st.sidebar.selectbox("選擇模型", ["mistral","llama3:8b","gemma:7b","qwen:7b"], index=0)
-temp  = st.sidebar.slider("溫度 (temperature)", 0.0, 1.0, 0.0, 0.01)
+model = st.sidebar.selectbox("選擇模型", ["mistral","llama3:8b","gemma:7b","qwen:7b","taide-medicine-qa-tw-q6"], index=0)
 
 # 3. 使用者輸入
 question = st.text_area("請輸入您的問題：", height=150)
 if st.button("產生回答"):
     with st.spinner("模型思考中..."):
-        chain = create_rag_chain(retr, model_name=model, temperature=temp)
+        chain = create_rag_chain(retr, model_name=model)
         res   = chain.invoke({"query": question})
     st.subheader("📝 回答")
     st.write(res["result"])
