@@ -1,4 +1,6 @@
 **all models are pull from ollama**
+
+
 **for streamlit_taide.py:**
 ```
 pip install streamlit chromadb ollama
